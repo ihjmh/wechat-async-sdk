@@ -49,10 +49,10 @@ usage
              
      def pack_rqt(method,url,params)
          if method=='get':
-             url=url_concat(url,kwargs['params'])
+             url=url_concat(url,params)
              body=None
          elif method=='post':
-             body =urllib.urlencode(kwargs['params'])
+             body =urllib.urlencode(params)
          return HTTPRequest(url=url, method=method.upper(), body=body,)
 ..           
     
