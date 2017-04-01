@@ -5,7 +5,7 @@
    
 why this?
 -----------
-   I got used to the style of the old one,cause Ace have no time to maintein it,I'd rather to do it
+   wechat-sdk in most of the situations need async,but since there is no async version of wechat,so I create this project
 
 usage
 -----------
