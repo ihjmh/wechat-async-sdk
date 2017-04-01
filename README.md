@@ -35,7 +35,7 @@ usage
          wechat = WechatBasic(conf)
          wechat.parse_data(wechat_xml)
          wechat.response_none()
-         #don't get the user_info directly ,just get the HTTPRequest
+         #don't get the user_info directly ,just get the method,url,params
          method,url,params=wechat.get_user_info(user_openid, lang='zh_CN')
          #async requests
          http_client = AsyncHTTPClient()
