@@ -6,7 +6,8 @@
 
 #usage
    Basicaly I pack  most of the sync requests into a tornado HTTPRequest,so you should use the sdk like this:
-   '''
+   
+   ''
    from tornado import gen
    from tornado.httpclient import AsyncHTTPClient
    from tornado import escape
@@ -27,7 +28,7 @@
        wechat.response_none()
        #don't get the user_info directly ,just get the HTTPRequest
        rqt_user_info=wechat.get_user_info(user_openid, lang='zh_CN')
-       #async requests
+       async requests
        http_client = AsyncHTTPClient()
        response    = yield http_client.fetch(rqt_user_info)
        if response.error:
@@ -36,7 +37,7 @@
            print response.body
            result =escape.json_decode(response.body)
            
-       '''
+    
     
     
 #update 2017-3-9:
