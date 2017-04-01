@@ -7,7 +7,7 @@
 #usage
    Basicaly I pack  most of the sync requests into a tornado HTTPRequest,so you should use the sdk like this:
    
-   ''
+.. code-block:: python
    from tornado import gen
    from tornado.httpclient import AsyncHTTPClient
    from tornado import escape
