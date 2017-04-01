@@ -9,7 +9,7 @@ why this?
 
 usage
 -----------
-   The fuctions have been packed into a list [method,url,params],you can use it for your async style
+   The fuctions have been packed into a list [method,url,params],you can use it for your async style.
    Tornado examples like this, I pack  most of the sync requests into a tornado HTTPRequest,easy:
 
 .. code-block:: python
