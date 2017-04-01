@@ -66,16 +66,16 @@ class WechatRequest(object):
             print 'the response_json is',response_json
             return response_json
         else:
-            if method=='get':
-                url=url_concat(url,kwargs['params'])
-                body=None
-            elif method=='post':
-                body =urllib.urlencode(kwargs['params'])
-            rqt=HTTPRequest( 
-                        url=url, 
-                        method=method.upper(), 
-                        body=body,)
-            return rqt
+#             if method=='get':
+#                 url=url_concat(url,kwargs['params'])
+#                 body=None
+#             elif method=='post':
+#                 body =urllib.urlencode(kwargs['params'])
+#             rqt=HTTPRequest( 
+#                         url=url, 
+#                         method=method.upper(), 
+#                         body=body,)
+            return method,url,kwargs.get('params',None)
 
 
     def get(self, url, access_token=None, **kwargs):
