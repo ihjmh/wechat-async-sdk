@@ -3,27 +3,14 @@
 import json
 import requests
 import six
-from tornado import gen
 from wechat_sdk.exceptions import OfficialAPIError
 
 #tornado version
 from tornado.httpclient import AsyncHTTPClient
 from tornado.httpclient import HTTPRequest
-# def handle_response(response):
-#     if response.error:
-#         print "Error:", response.error
-#     else:
-#         print 'the rr',response.body
-
-
-# @gen.coroutine
-# def request_asyn(method,url,**kwargs):
-#     print 'the request_asyn is method',method
-#     print 'the request_asyn is url',url
-#     print 'the request_asyn is kwargs',kwargs
-#     http_client = AsyncHTTPClient()
-#     rec=yield http_client.fetch('http://www.baidu.com')
-#     print 'the  rec.body is',rec.body
+from tornado import gen
+from tornado.httputil import url_concat
+import urllib
 
 class WechatRequest(object):
     """ WechatRequest 请求类
@@ -60,43 +47,36 @@ class WechatRequest(object):
             if isinstance(body, six.text_type):
                 body = body.encode('utf8')
             kwargs["data"] = body
-        r = requests.request(
-            method=method,
-            url=url,
-            **kwargs
-        )
-        r.raise_for_status()
-        try:
-            response_json = r.json()
-        except ValueError:  # 非 JSON 数据
-            return r
+       if url=='https://api.weixin.qq.com/cgi-bin/token':
+            r = requests.request(
+                method=method,
+                url=url,
+                **kwargs
+            )
+            r.raise_for_status()
+            try:
+                response_json = r.json()
+            except ValueError:  # 非 JSON 数据
+                return r
+    
+            headimgurl = response_json.get('headimgurl')
+            if headimgurl:
+                response_json['headimgurl'] = headimgurl.replace('\\', '')
+            self._check_official_error(response_json)
+            print 'the response_json is',response_json
+            return response_json
+        else:
+            if method=='get':
+                url=url_concat(url,kwargs['params'])
+                body=None
+            elif method=='post':
+                body =urllib.urlencode(kwargs['params'])
+            rqt=HTTPRequest( 
+                        url=url, 
+                        method=method.upper(), 
+                        body=body,)
+            return rqt
 
-        headimgurl = response_json.get('headimgurl')
-        if headimgurl:
-            response_json['headimgurl'] = headimgurl.replace('\\', '')
-        self._check_official_error(response_json)
-        return response_json
-        ###########################async##############################
-        # method=method.upper()
-        # # print 'the request_asyn is method',method
-        # # print 'the request_asyn is url',url
-        # # print 'the request_asyn is kwargs',kwargs
-        # # # method='GET'
-        # # # url='http://www.baidu.com'
-        # response=yield AsyncHTTPClient().fetch(HTTPRequest( 
-        #             url=url, 
-        #             #follow_redirects=False
-        #             method=method, 
-        #             body=kwargs['params']
-        #             ))
-        #             # body=download_file.body, 
-        #             # headers=headers_dict, 
-        # print 'the response body is',response.body
-        # if response.error:
-        #     print "Error:", response.error
-        # else:
-        #     print 'the rr',response.body
-        ############################sync################################
 
     def get(self, url, access_token=None, **kwargs):
         """
