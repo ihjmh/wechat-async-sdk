@@ -11,7 +11,7 @@
    from tornado import gen
    from tornado.httpclient import AsyncHTTPClient
    from tornado import escape
-   ....
+   
    @gen.coroutine
    def wechat_test(wechat_xml):
        conf = WechatConf(
@@ -36,7 +36,7 @@
        else:
            print response.body
            result =escape.json_decode(response.body)
-           
+_.           
     
     
     
