@@ -17,7 +17,9 @@ usage
       from tornado import gen
       from tornado.httpclient import AsyncHTTPClient
       from tornado import escape
-   
+      from tornado.httputil import url_concat
+      import urllib
+      
       @gen.coroutine
       def wechat_test(wechat_xml):
           conf = WechatConf(
@@ -50,10 +52,7 @@ usage
              body=None
          elif method=='post':
              body =urllib.urlencode(kwargs['params'])
-         return HTTPRequest( 
-                        url=url, 
-                        method=method.upper(), 
-                        body=body,)
+         return HTTPRequest(url=url, method=method.upper(), body=body,)
 ..           
     
     
