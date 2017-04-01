@@ -6,15 +6,16 @@
 
 #usage
    Basicaly I pack  most of the sync requests into a tornado HTTPRequest,so you should use the sdk like this:
-   
+
 .. code-block:: python
-   from tornado import gen
-   from tornado.httpclient import AsyncHTTPClient
-   from tornado import escape
    
-   @gen.coroutine
-   def wechat_test(wechat_xml):
-       conf = WechatConf(
+      from tornado import gen
+      from tornado.httpclient import AsyncHTTPClient
+      from tornado import escape
+   
+      @gen.coroutine
+      def wechat_test(wechat_xml):
+          conf = WechatConf(
             token='yourtoken', 
             appid='yourappid',   
             appsecret='yourappsecret', 
@@ -22,20 +23,20 @@
             encoding_aes_key='yourencoding_aes_key',
             access_token=None,
             access_token_expires_at=None,            
-        )
-       wechat = WechatBasic(conf)
-       wechat.parse_data(wechat_xml)
-       wechat.response_none()
-       #don't get the user_info directly ,just get the HTTPRequest
-       rqt_user_info=wechat.get_user_info(user_openid, lang='zh_CN')
-       async requests
-       http_client = AsyncHTTPClient()
-       response    = yield http_client.fetch(rqt_user_info)
-       if response.error:
-           print "Error:", response.error
-       else:
-           print response.body
-           result =escape.json_decode(response.body)
+                           )
+         wechat = WechatBasic(conf)
+         wechat.parse_data(wechat_xml)
+         wechat.response_none()
+         #don't get the user_info directly ,just get the HTTPRequest
+         rqt_user_info=wechat.get_user_info(user_openid, lang='zh_CN')
+         async requests
+         http_client = AsyncHTTPClient()
+         response    = yield http_client.fetch(rqt_user_info)
+         if response.error:
+            print "Error:", response.error
+         else:
+            print response.body
+            result =escape.json_decode(response.body)
 ..           
     
     
