@@ -1,7 +1,10 @@
 # wechat-tornado-sdk
+.. image:: https://badges.gitter.im/Join%20Chat.svg
+   :alt: test https://gitter.im/tornadoweb/tornado
+   :target: https://gitter.im/tornadoweb/tornado?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
    Based on the wechat-sdk,but part of the requests divide from the sdk, so tornado or other web frame work can make it async.
    Already got permissions from the Ace Kwok(doraemonext@gmail.com),my email is damonhowe2010@gmail.com.
-   The doc can still be useful
+   The doc can still be useful https://wechat-sdk.doraemonext.com/
    
 why this?
 -----------
