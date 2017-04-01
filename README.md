@@ -16,6 +16,7 @@ usage
    
       from tornado import gen
       from tornado.httpclient import AsyncHTTPClient
+      from tornado.httpclient import HTTPRequest
       from tornado import escape
       from tornado.httputil import url_concat
       import urllib
